@@ -18,7 +18,7 @@ urlpatterns = [
     path('tags/', views.tag_list, name='tag_list'),
     path('tags/<slug:tag>/', views.tag_detail, name='tag_detail'),
     path('projects/', views.projects, name='projects'),
-    path('resume/', views.resume, name='resume'),
+    path('resume/preview/', views.resume_preview, name='resume_preview'),
     path('contact/', views.contact, name='contact'),
     path('pgp/', views.pgp, name='pgp'),
 ]
