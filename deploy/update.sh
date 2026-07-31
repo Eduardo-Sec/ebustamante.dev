@@ -1,26 +1,30 @@
 #!/bin/bash
 # Deployment update script — run after every git push.
-# Usage: ssh user@REDACTED 'bash /opt/ebustamante/deploy/update.sh'
+# Usage: ssh user@REDACTED 'sudo bash /opt/ebustamante/deploy/update.sh'
+#
+# Runs as root so it can restart the systemd service, but every step
+# that touches app files (git, pip, manage.py) drops to the ebustamante
+# user via sudo -u -- running those as root instead pollutes .git/.venv
+# with root-owned files and breaks future non-root git/pip operations.
 set -euo pipefail
 
 APP_DIR="/opt/ebustamante"
-cd "$APP_DIR"
+APP_USER="ebustamante"
 
 echo "==> Pulling latest code"
-git config --global --add safe.directory "$APP_DIR" 2>/dev/null || true
-git pull
+sudo -u "$APP_USER" git -C "$APP_DIR" pull
 
 echo "==> Installing any new dependencies"
-.venv/bin/pip install -r requirements.txt --quiet
+sudo -u "$APP_USER" "$APP_DIR/.venv/bin/pip" install -r "$APP_DIR/requirements.txt" --quiet
 
 echo "==> Running migrations"
-.venv/bin/python manage.py migrate --noinput
+sudo -u "$APP_USER" "$APP_DIR/.venv/bin/python" "$APP_DIR/manage.py" migrate --noinput
 
 echo "==> Collecting static files"
-.venv/bin/python manage.py collectstatic --noinput
+sudo -u "$APP_USER" "$APP_DIR/.venv/bin/python" "$APP_DIR/manage.py" collectstatic --noinput
 
 echo "==> Importing new writeups"
-.venv/bin/python manage.py import_writeups
+sudo -u "$APP_USER" "$APP_DIR/.venv/bin/python" "$APP_DIR/manage.py" import_writeups
 
 echo "==> Restarting gunicorn"
 systemctl restart ebustamante
