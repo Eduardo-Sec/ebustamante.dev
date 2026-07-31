@@ -14,7 +14,7 @@ STATIC_PAGES = [
     {'title': 'About', 'url_name': 'about'},
     {'title': 'Writeups', 'url_name': 'writeup_list'},
     {'title': 'Projects', 'url_name': 'projects'},
-    {'title': 'Resume', 'url_name': 'resume'},
+    {'title': 'Resume', 'url_name': 'resume_preview'},
     {'title': 'Contact', 'url_name': 'contact'},
     {'title': 'PGP', 'url_name': 'pgp'},
 ]
@@ -122,7 +122,7 @@ def projects(request):
     return render(request, 'projects.html', _site_context())
 
 
-def resume(request):
+def resume_preview(request):
     return render(request, 'resume.html', _site_context())
 
 

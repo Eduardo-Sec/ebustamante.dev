@@ -70,6 +70,10 @@ echo "==> SELinux: allow nginx to proxy to gunicorn"
 setsebool -P httpd_can_network_connect 1
 # Allow nginx to read static files under /opt
 chcon -Rt httpd_sys_content_t "$APP_DIR/staticfiles"
+# Persistent (survives restorecon/relabel, unlike a bare chcon) context for
+# the resume, served directly by nginx from outside the hashed static pipeline.
+semanage fcontext -a -t httpd_sys_content_t "$APP_DIR/files(/.*)?"
+restorecon -Rv "$APP_DIR/files" 2>/dev/null || true
 
 echo "==> Firewall: nginx listens only on localhost (Cloudflare tunnel handles external)"
 # Do NOT open port 80/443 publicly — tunnel handles that

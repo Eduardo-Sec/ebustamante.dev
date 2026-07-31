@@ -12,7 +12,7 @@
     <a href="{% url 'about' %}" class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">about</a>
     <a href="{% url 'writeup_list' %}" class="{% if request.resolver_match.url_name == 'writeup_list' or request.resolver_match.url_name == 'writeup_detail' %}active{% endif %}">writeups</a>
     <a href="{% url 'projects' %}" class="{% if request.resolver_match.url_name == 'projects' %}active{% endif %}">projects</a>
-    <a href="{% url 'resume' %}" class="{% if request.resolver_match.url_name == 'resume' %}active{% endif %}">resume</a>
+    <a href="{% url 'resume_preview' %}" class="{% if request.resolver_match.url_name == 'resume_preview' %}active{% endif %}">resume</a>
     <a href="{% url 'contact' %}" class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">contact</a>
     <a href="{% url 'pgp' %}" class="{% if request.resolver_match.url_name == 'pgp' %}active{% endif %}">pgp</a>
     <a href="{% url 'rss_page' %}" class="{% if request.resolver_match.url_name == 'rss_page' %}active{% endif %}">rss</a>
