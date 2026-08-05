@@ -35,8 +35,11 @@ class Writeup(models.Model):
 
     @property
     def primary_tag(self):
-        tag = self.tags.order_by('slug').first()
-        return tag.slug if tag else ''
+        tags = sorted(self.tags.all(), key=lambda t: t.slug)
+        if not tags:
+            return ''
+        specific = [t for t in tags if t.slug != 'project']
+        return (specific[0] if specific else tags[0]).slug
 
     @property
     def reading_time(self):

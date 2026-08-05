@@ -5,9 +5,7 @@
     <span class="writeup-title">{% if writeup.featured %}<span class="featured-badge">★</span>{% endif %} {{ writeup.title }}</span>
   </div>
   <div class="writeup-right">
-    {% for tag in writeup.tags.all %}
-    <span class="writeup-tag">{{ tag.slug }}</span>
-    {% endfor %}
+    <span class="writeup-tag">{{ writeup.primary_tag }}</span>
     <span class="writeup-date mono">{{ writeup.date|date:"m-d-Y" }}</span>
   </div>
 </a>
