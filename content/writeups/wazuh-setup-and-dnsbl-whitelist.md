@@ -1,7 +1,7 @@
 ---
 title: "Deploying and hardening Wazuh, SIEM setup, pfSense integration, and custom detection rules"
 date: 2026-06-11
-tags: ["project", "detection"]
+tags: ["project", "detection", "homelab"]
 draft: false
 ---
 
