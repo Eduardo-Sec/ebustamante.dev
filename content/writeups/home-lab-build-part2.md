@@ -1,7 +1,7 @@
 ---
 title: "Hardening the home lab network, VLANs, DNS blocking, and pfSense security configuration"
 date: 2026-06-05
-tags: ["project"]
+tags: ["project", "homelab"]
 draft: false
 ---
 
