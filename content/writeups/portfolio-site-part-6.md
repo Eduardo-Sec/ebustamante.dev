@@ -1,6 +1,6 @@
 ---
 title: "Closing out CSP, upgrading to Django 5.2, and rebuilding the resume pipeline"
-date: 2026-08-05
+date: 2026-08-04
 tags: ["project", "site"]
 draft: false
 ---
