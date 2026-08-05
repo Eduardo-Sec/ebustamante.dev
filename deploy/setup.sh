@@ -5,7 +5,7 @@ set -euo pipefail
 
 APP_DIR="/opt/ebustamante"
 APP_USER="ebustamante"
-REPO_URL="https://github.com/Eduardo-Sec/EduardoSec.github.io.git"
+REPO_URL="https://github.com/Eduardo-Sec/ebustamante.dev.git"
 LOG_DIR="/var/log/ebustamante"
 
 echo "==> Installing system packages"
