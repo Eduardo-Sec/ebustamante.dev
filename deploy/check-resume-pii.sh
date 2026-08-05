@@ -1,8 +1,8 @@
 #!/bin/bash
 # Safety gate for publishing a new resume. Run against the candidate PDF
-# BEFORE committing it to files/resume.pdf -- catches accidentally
-# publishing the private build (phone/personal email/city) instead of
-# the public one.
+# BEFORE committing it to files/resume.pdf -- catches accidentally leaking
+# the phone number, which is the one piece of contact info this site never
+# publishes (email and city are fine, only the number is spam-sensitive).
 #
 # Usage: deploy/check-resume-pii.sh /path/to/candidate.pdf
 set -euo pipefail
@@ -14,10 +14,10 @@ if [ ! -f "$FILE" ]; then
     exit 1
 fi
 
-MATCHES=$(pdftotext "$FILE" - | grep -inE '227-6628|eabustamante1@gmail|nebraska\.edu|Omaha, NE|Grand Island' || true)
+MATCHES=$(pdftotext "$FILE" - | grep -inE '227-6628' || true)
 
 if [ -n "$MATCHES" ]; then
-    echo "PII FOUND -- do not publish this file:" >&2
+    echo "Phone number found -- do not publish this file:" >&2
     echo "$MATCHES" >&2
     exit 1
 fi
