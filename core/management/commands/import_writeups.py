@@ -117,6 +117,12 @@ class Command(BaseCommand):
             else:
                 updated += 1
 
+        orphaned_tags = Tag.objects.filter(writeups__isnull=True)
+        orphaned_count = orphaned_tags.count()
+        if orphaned_count:
+            orphaned_tags.delete()
+            self.stdout.write(f'Removed {orphaned_count} orphaned tag(s) with no writeups.')
+
         self.stdout.write(
             self.style.SUCCESS(
                 f'Done — {created} created, {updated} updated, {skipped} skipped.'
