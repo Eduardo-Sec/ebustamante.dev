@@ -1,7 +1,7 @@
 ---
 title: "Redesigning the portfolio site, layouts, animations, and a SOC dashboard"
 date: 2026-04-07
-tags: ["project"]
+tags: ["project", "site"]
 draft: false
 ---
 

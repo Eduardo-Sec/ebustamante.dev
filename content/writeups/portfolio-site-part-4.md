@@ -1,7 +1,7 @@
 ---
 title: "Automating the portfolio site, link checking, spell checking, Lighthouse, and security audits"
 date: 2026-04-08
-tags: ["project"]
+tags: ["project", "site"]
 draft: false
 ---
 

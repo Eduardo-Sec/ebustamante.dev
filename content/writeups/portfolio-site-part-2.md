@@ -1,7 +1,7 @@
 ---
 title: "Expanding the portfolio site, security, features, and dev workflow"
 date: 2026-04-05
-tags: ["project"]
+tags: ["project", "site"]
 draft: false
 ---
 
