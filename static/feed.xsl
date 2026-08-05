@@ -183,7 +183,7 @@
               <span class="status-dot"></span>
               <span class="status-text">ebustamante.dev</span>
             </div>
-            <div class="status-right">UNO · Omaha, NE</div>
+            <div class="status-right">UNO · Nebraska</div>
           </div>
         </footer>
       </body>
