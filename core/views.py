@@ -156,7 +156,7 @@ def humans_txt(request):
         '/* TEAM */\n'
         'Developer: Eduardo Bustamante\n'
         'Contact: eabustamante1 [at] gmail.com\n'
-        'From: Nebraska\n'
+        'From: Omaha, NE\n'
         '\n'
         '/* SITE */\n'
         'Last update: 2026/07/02\n'
