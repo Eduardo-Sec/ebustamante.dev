@@ -1,7 +1,7 @@
 ---
 title: "Redesigning the portfolio to emerald and gold, then hardening the whole stack"
 date: 2026-07-01
-tags: ["project"]
+tags: ["project", "site"]
 draft: false
 ---
 
