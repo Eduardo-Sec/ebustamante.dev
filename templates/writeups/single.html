@@ -71,9 +71,7 @@
         <span class="writeup-title">{% if related.featured %}<span class="featured-badge">★</span>{% endif %} {{ related.title }}</span>
       </div>
       <div class="writeup-right">
-        {% for tag in related.tags.all %}
-        <span class="writeup-tag">{{ tag.slug }}</span>
-        {% endfor %}
+        <span class="writeup-tag">{{ related.primary_tag }}</span>
         <span class="writeup-date mono">{{ related.date|date:"m-d-Y" }}</span>
       </div>
     </a>
