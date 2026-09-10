@@ -18,16 +18,8 @@
   --pb-line-2:  rgba(255, 255, 255, .08);
 }
 
-/* A wide diagram or table briefly wider than the viewport during layout is
-   enough for a mobile browser to zoom the whole page out to fit it, which
-   reads as "the page opens zoomed in" since everything is smaller than it
-   should be. Clipping horizontal overflow on both html and body keeps the
-   layout viewport pinned to the actual device width. */
-html { overflow-x: hidden; }
-
 .pb-body {
   margin: 0;
-  overflow-x: hidden;
   background: var(--pb-bg);
   color: var(--pb-text);
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
