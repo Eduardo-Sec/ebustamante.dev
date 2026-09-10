@@ -1,0 +1,47 @@
+{% extends "playbook/_base.html" %}
+
+{% block pb_content %}
+
+<div class="pb-note">This page is built to be printed and folded into a pocket. Everything on
+it is on the other pages in more detail.</div>
+
+<section class="pb-sec pb-cardsec">
+  <h2>▸ the eight</h2>
+  <div class="pb-cardgrid">
+    {% for p in card_plays %}
+      <div class="pb-minicard" data-depth="{{ p.depth }}">
+        <div class="pb-minihd">
+          <h3>{{ p.name|safe }}</h3>
+          <span>{{ p.depth }} · {{ p.form }}</span>
+        </div>
+        <div class="pb-minifig">{{ p.svg|safe }}</div>
+        <p class="pb-minired">{{ p.read|safe }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="pb-sec pb-cardsec">
+  <h2>▸ the three coverages</h2>
+  <div class="pb-cardgrid">
+    {% for c in card_coverages %}
+      <div class="pb-minicard">
+        <div class="pb-minihd">
+          <h3>{{ c.name|safe }}</h3>
+          <span>{{ c.sub|safe }}</span>
+        </div>
+        <div class="pb-minifig">{{ c.svg|safe }}</div>
+        <p class="pb-minired">{{ c.weak|safe }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="pb-sec pb-cardsec">
+  <h2>▸ the numbers</h2>
+  {% include "playbook/_table.html" with t=t_pat %}
+  {% include "playbook/_table.html" with t=t_punt %}
+  {% include "playbook/_table.html" with t=t_situ %}
+</section>
+
+{% endblock %}

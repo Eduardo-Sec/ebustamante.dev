@@ -1,0 +1,41 @@
+<details class="pb-filters" id="playfilters">
+  <summary>
+    <span>filter the plays</span>
+    <span class="pb-count" data-total="{{ play_count }}">showing all {{ play_count }}</span>
+  </summary>
+  <div class="pb-filter-body">
+    {% for key, label, values in filter_groups %}
+      <div class="pb-fgroup">
+        <span class="pb-flabel">{{ label }}</span>
+        <div class="pb-frow">
+          {% for v in values %}
+            <button type="button" class="pb-fchip" data-f="{{ key }}" data-v="{{ v }}"
+                    aria-pressed="false">{{ v }}</button>
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+    <div class="pb-frow pb-factions">
+      <button type="button" class="pb-fchip pb-freset">reset filters</button>
+      <span class="pb-fnote">Picking two chips in the same row widens the list. Picking
+      chips in different rows narrows it.</span>
+    </div>
+  </div>
+</details>
+
+<p class="pb-empty pb-hidden">Nothing matches all of those at once. Drop a chip or hit
+reset filters.</p>
+
+<details class="pb-index">
+  <summary>jump to a play</summary>
+  <div class="pb-index-body">
+    {% for group, items in groups %}
+      {% for p in items %}
+        <a class="pb-idx" href="#p-{{ p.id }}" data-for="p-{{ p.id }}">{{ p.name|safe }}</a>
+      {% endfor %}
+    {% endfor %}
+    {% for p in tricks %}
+      <a class="pb-idx" href="#p-{{ p.id }}" data-for="p-{{ p.id }}">{{ p.name|safe }}</a>
+    {% endfor %}
+  </div>
+</details>

@@ -1,0 +1,9 @@
+<div class="pb-asgs">
+  <h4 class="pb-asgs-h">Who does what</h4>
+  {% for pos, job, desc in rows %}
+    <div class="pb-asg" data-pos="{{ pos }}">
+      <span class="pb-tagsq">{{ pos }}</span>
+      <div><span class="pb-job">{{ job|safe }}</span><p>{{ desc|safe }}</p></div>
+    </div>
+  {% endfor %}
+</div>

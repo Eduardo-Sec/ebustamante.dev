@@ -1,0 +1,104 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+{# Unlisted. Keep this tag, it is the only thing stopping the pages showing up in search. #}
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="referrer" content="same-origin">
+
+<title>{{ pb_title }} · playbook</title>
+
+{% comment %}
+  Deliberately self contained. This does not extend base.html, so the site nav, the command
+  palette and the footer links never render here. main.css is loaded so the --pb-* tokens
+  follow a site wide retheme, but nothing here depends on a block name in base.html.
+{% endcomment %}
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+<link rel="stylesheet" href="{% static 'playbook/playbook.css' %}">
+
+<link rel="icon" type="image/svg+xml" href="{% static 'favicon.svg' %}">
+<link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon-32x32.png' %}">
+<link rel="apple-touch-icon" sizes="180x180" href="{% static 'apple-touch-icon.png' %}">
+<link rel="manifest" href="{% url 'webmanifest' %}">
+</head>
+<body class="pb-body">
+
+<div class="pb">
+
+  <header class="pb-top">
+    <a class="pb-brand" href="/" aria-label="eb.dev, home">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="pb-brand-mark">
+        <circle cx="12" cy="12" r="2.5"/>
+        <circle cx="12" cy="12" r="6.5" stroke-width="1" opacity="0.5"/>
+        <circle cx="12" cy="12" r="11" stroke-width="0.8" opacity="0.22"/>
+        <line x1="12" y1="12" x2="20" y2="5.5" stroke-width="1.1" opacity="0.65" stroke-linecap="round"/>
+      </svg>
+      <span class="pb-brand-text mono">eb<span class="pb-period">.</span>dev</span>
+    </a>
+    <span class="pb-top-note">flag football playbook</span>
+  </header>
+
+  <div class="pb-hero">
+    <p class="pb-kicker">▸ unlisted</p>
+    <h1>{{ pb_title }}<span class="pb-period">.</span></h1>
+    <p class="pb-lede">{{ pb_lede }}</p>
+  </div>
+
+  <nav class="pb-tabs" aria-label="Playbook sections">
+    {% for key, label, url in pb_nav %}
+      <a href="{% url url %}"{% if key == pb_page %} class="on" aria-current="page"{% endif %}>{{ label }}</a>
+    {% endfor %}
+  </nav>
+
+  <div class="pb-posbar">
+    <div class="pb-posrow" role="group" aria-label="Offense position">
+      <span class="pb-poslabel">offense</span>
+      {% for p, name, job in off_pos %}
+        <button type="button" class="pb-chip" data-p="{{ p }}" data-g="off"
+                aria-pressed="false" title="{{ name }}">{{ p }}</button>
+      {% endfor %}
+    </div>
+    <div class="pb-posrow" role="group" aria-label="Defense position">
+      <span class="pb-poslabel">defense</span>
+      {% for p, name, job in def_pos %}
+        <button type="button" class="pb-chip" data-p="{{ p }}" data-g="def"
+                aria-pressed="false" title="{{ name }}">{{ p }}</button>
+      {% endfor %}
+      <button type="button" class="pb-chip pb-clear">clear both</button>
+    </div>
+  </div>
+
+  <div class="pb-toolbar">
+    <button type="button" class="pb-tool pb-basics-toggle" aria-pressed="false">
+      explain the basics
+    </button>
+    <button type="button" class="pb-tool pb-expand" aria-pressed="false">expand every card</button>
+    <button type="button" class="pb-tool pb-print">print this page</button>
+    <span class="pb-hint">Pick one offense position and one defense position. On a phone
+    that also hides everybody else's assignments so each card shows only your job.</span>
+  </div>
+
+  {% block pb_content %}{% endblock %}
+
+  <nav class="pb-pager">
+    {% if pb_prev %}<a href="{% url pb_prev.2 %}" class="prev">← {{ pb_prev.1 }}</a>{% else %}<span></span>{% endif %}
+    {% if pb_next %}<a href="{% url pb_next.2 %}" class="next">{{ pb_next.1 }} →</a>{% endif %}
+  </nav>
+
+  <footer class="pb-foot">
+    <p>Built from the UNO Competitive Sports flag football rules sheet, revised 5/15/2023. If a
+    rule here disagrees with the official on the field, the official wins, and only the captain
+    argues about it.</p>
+    <p class="pb-foot-meta">ebustamante.dev · UNO · Omaha, NE</p>
+  </footer>
+
+</div>
+
+<button type="button" class="pb-totop" aria-label="back to top">↑</button>
+
+<script src="{% static 'playbook/playbook.js' %}" defer></script>
+</body>
+</html>
