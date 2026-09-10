@@ -55,16 +55,18 @@
   <p class="pb-sub-p">Every play in this book comes out of one of these. Say the formation and
   then the play, &ldquo;Deuce Smash&rdquo;. Add &ldquo;Left&rdquo; to flip any three receiver
   call.</p>
-  {% for f in formations %}
-    <div class="pb-form">
-      <div class="pb-form-hd"><h3>{{ f.name }}</h3><span>{{ f.sub|safe }}</span></div>
-      <div class="pb-form-bd">
-        <div class="pb-fig">{{ f.svg|safe }}</div>
-        <p>{{ f.text|safe }}</p>
-        <p class="pb-who">{{ f.who|safe }}</p>
+  <div class="pb-plist">
+    {% for f in formations %}
+      <div class="pb-form">
+        <div class="pb-form-hd"><h3>{{ f.name }}</h3><span>{{ f.sub|safe }}</span></div>
+        <div class="pb-form-bd">
+          <div class="pb-fig">{{ f.svg|safe }}</div>
+          <p>{{ f.text|safe }}</p>
+          <p class="pb-who">{{ f.who|safe }}</p>
+        </div>
       </div>
-    </div>
-  {% endfor %}
+    {% endfor %}
+  </div>
 </section>
 
 <section id="penalties" class="pb-sec">
@@ -84,12 +86,14 @@
   <h2>▸ drills</h2>
   <p class="pb-sub-p">Six drills, and the first three fix more of our problems than any new
   play will.</p>
-  {% for name, when, how in drills %}
-    <div class="pb-card">
-      <h3>{{ name }} <span class="pb-drill-when">{{ when }}</span></h3>
-      <p>{{ how|safe }}</p>
-    </div>
-  {% endfor %}
+  <div class="pb-plist">
+    {% for name, when, how in drills %}
+      <div class="pb-card">
+        <h3>{{ name }} <span class="pb-drill-when">{{ when }}</span></h3>
+        <p>{{ how|safe }}</p>
+      </div>
+    {% endfor %}
+  </div>
 </section>
 
 <section id="glossary" class="pb-sec">

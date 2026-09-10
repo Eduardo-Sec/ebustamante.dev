@@ -69,7 +69,9 @@
 .pb-hero { padding: 8px 0 22px; }
 .pb-kicker { color: var(--pb-muted); font-size: 13px; letter-spacing: .06em; margin: 0 0 10px; }
 .pb-hero h1 {
-  font-size: clamp(34px, 8vw, 56px);
+  /* Capped at 44px to match .page-hero h1, the site's convention for an
+     interior page's own heading, rather than the homepage's bigger hero. */
+  font-size: clamp(34px, 8vw, 44px);
   font-weight: 750;
   letter-spacing: -.025em;
 }
@@ -117,7 +119,9 @@
 
 /* sections -------------------------------------------------------------- */
 .pb-sec { padding: 40px 0 4px; scroll-margin-top: 90px; }
-.pb-sec > h2 { font-size: clamp(23px, 5vw, 32px); font-weight: 750; letter-spacing: -.02em; }
+/* Capped at 22px to match .post-content h2, the site's own size for a
+   section break inside a long form page. */
+.pb-sec > h2 { font-size: clamp(21px, 4vw, 22px); font-weight: 750; letter-spacing: -.02em; }
 .pb-sub-p { color: var(--pb-muted); max-width: 64ch; }
 .pb-h3 { margin: 30px 0 6px; font-size: 19px; font-weight: 700; }
 .pb-group {
@@ -660,6 +664,27 @@ ul.pb-bul.pb-card { padding-left: 36px; }
 
 
 /* =========================================================================
+   Desktop.
+
+   Everything above this point already works at any width, but the play and
+   coverage lists are just stacked full width cards, which is correct on a
+   phone and wrong on a monitor, twenty two plays turns into one very long
+   single column with huge dead margins on either side. This block only
+   adds what a wide viewport can afford: a wider reading column, matching
+   the 960px the rest of the site uses for its own card grids (about, pgp,
+   projects, contact), and a two column grid for every repeated card list.
+   ========================================================================= */
+@media (min-width: 900px) {
+  .pb { max-width: 960px; }
+
+  .pb-plist {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    align-items: start;
+  }
+  .pb-plist > * { margin: 0; }
+}
+
+/* =========================================================================
    Mobile.
 
    The phone is the primary surface, most of the team will never open this on
@@ -707,7 +732,7 @@ ul.pb-bul.pb-card { padding-left: 36px; }
   .pb-lede { font-size: 15.5px; margin-top: 8px; }
   .pb-sec { padding: 30px 0 4px; scroll-margin-top: 84px; }
   .pb-play { scroll-margin-top: 84px; }
-  .pb-sec > h2 { font-size: 24px; }
+  .pb-sec > h2 { font-size: 21px; }
 
   /* one scrolling row instead of two wrapped ones */
   .pb-tabs {

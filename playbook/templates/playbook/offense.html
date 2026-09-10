@@ -27,7 +27,9 @@
   {% for group, items in groups %}
     <section class="pb-pgroup">
       <h3 class="pb-group">{{ group }}</h3>
-      {% for p in items %}{% include "playbook/_play.html" %}{% endfor %}
+      <div class="pb-plist">
+        {% for p in items %}{% include "playbook/_play.html" %}{% endfor %}
+      </div>
     </section>
   {% endfor %}
 </section>
@@ -42,7 +44,9 @@
   <div class="pb-note">One per game, maximum two. Every one of these works because it looks
   like a play we have already run for real yards, so run the real play first.</div>
   <section class="pb-pgroup">
-    {% for p in tricks %}{% include "playbook/_play.html" %}{% endfor %}
+    <div class="pb-plist">
+      {% for p in tricks %}{% include "playbook/_play.html" %}{% endfor %}
+    </div>
   </section>
 </section>
 

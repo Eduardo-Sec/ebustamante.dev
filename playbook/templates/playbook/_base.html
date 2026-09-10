@@ -99,6 +99,17 @@
 
 <button type="button" class="pb-totop" aria-label="back to top">↑</button>
 
+{% comment %}
+  Matches base.html's cursor markup exactly so main.css's existing #cursor-*
+  rules apply with no playbook-specific CSS. Desktop only, main.css already
+  restores the native cursor under (pointer: coarse).
+{% endcomment %}
+<div id="cursor-dot"></div>
+<div id="cursor-bracket"><span></span></div>
+<div id="cursor-data">
+  <div class="data-line">x:<span id="val-x">0000</span> y:<span id="val-y">0000</span></div>
+</div>
+
 <script src="{% static 'playbook/playbook.js' %}" defer></script>
 </body>
 </html>

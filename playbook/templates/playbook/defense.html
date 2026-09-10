@@ -8,7 +8,9 @@
   position. <strong>Two</strong> is our base, and if you did not hear a call then you are in
   Two. The single most important defensive fact in this league is that they need twenty yards
   for a first down, so making them complete four short passes in a row is a win for us.</p>
-  {% for c, beaten_by in coverages %}{% include "playbook/_coverage.html" %}{% endfor %}
+  <div class="pb-plist">
+    {% for c, beaten_by in coverages %}{% include "playbook/_coverage.html" %}{% endfor %}
+  </div>
 </section>
 
 <section id="adjustments" class="pb-sec">
