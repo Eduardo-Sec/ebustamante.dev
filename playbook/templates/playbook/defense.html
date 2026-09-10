@@ -1,0 +1,49 @@
+{% extends "playbook/_base.html" %}
+
+{% block pb_content %}
+
+<section id="coverages" class="pb-sec">
+  <h2>▸ coverages</h2>
+  <p class="pb-sub-p">Eight calls out of one set of personnel, so nobody has to learn a new
+  position. <strong>Two</strong> is our base, and if you did not hear a call then you are in
+  Two. The single most important defensive fact in this league is that they need twenty yards
+  for a first down, so making them complete four short passes in a row is a win for us.</p>
+  {% for c, beaten_by in coverages %}{% include "playbook/_coverage.html" %}{% endfor %}
+</section>
+
+<section id="adjustments" class="pb-sec">
+  <h2>▸ adjustments, call these out loud</h2>
+  <p class="pb-sub-p">Silence is how a defense gets somebody uncovered. Whoever sees it first
+  says it.</p>
+  {% include "playbook/_pairs.html" with rows=adjustments %}
+</section>
+
+<section id="technique" class="pb-sec">
+  <h2>▸ technique</h2>
+  <p class="pb-sub-p">How deep to line up, how to read a receiver, how to rush, and how to
+  actually get the flag.</p>
+
+  <h3 class="pb-h3">Alignment depth by call</h3>
+  {% include "playbook/_table.html" with t=t_depth %}
+
+  <h3 class="pb-h3">Man coverage</h3>
+  {% include "playbook/_pairs.html" with rows=man_tech %}
+
+  <h3 class="pb-h3">Reading a receiver, the ladder</h3>
+  <p class="pb-sub-p">Every route gives itself away at one of three moments. Learn the
+  checkpoints and you stop guessing.</p>
+  {% include "playbook/_pairs.html" with rows=read_ladder %}
+
+  <h3 class="pb-h3">Zone coverage</h3>
+  {% include "playbook/_pairs.html" with rows=zone_tech %}
+
+  <h3 class="pb-h3">Rushing the quarterback</h3>
+  <p class="pb-sub-p">Nobody has to rush in this league, and no defender may run through a
+  blocker or touch the passer. The rush is a skill here, not an effort contest.</p>
+  {% include "playbook/_pairs.html" with rows=rush_tech %}
+
+  <h3 class="pb-h3">Pulling the flag</h3>
+  {% include "playbook/_pairs.html" with rows=flag_tech %}
+</section>
+
+{% endblock %}

@@ -1,0 +1,124 @@
+{% extends "playbook/_base.html" %}
+
+{% block pb_content %}
+
+<details class="pb-basics pb-basics-lead">
+  <summary>never played organised football? start here</summary>
+  <div>
+    <p>Seven of us on the field at a time. One player, the center, starts every play by
+    handing the ball backwards between his legs to the quarterback, who is standing about
+    five yards behind him. That is the snap, and nothing can happen until it does.</p>
+    <p>After the snap the quarterback throws it, hands it off, or runs with it. The play
+    ends when somebody pulls the flag off the ball carrier's belt, or the ball hits the
+    ground, or he steps out of bounds.</p>
+    <p>We get four tries, called downs, to move the ball twenty yards. Get there and we get
+    four more. Fail and the other team takes over. That is the entire game.</p>
+    <p>Your position is a letter. Find it in the bar above, tap it, and every instruction
+    written for you will light up on all five pages. The glossary near the bottom of this
+    page explains any word you hit that you do not know.</p>
+  </div>
+</details>
+
+<section id="rules" class="pb-sec">
+  <h2>▸ sixteen rules that change how we play</h2>
+  <p class="pb-sub-p">This is not the flag football you have played at a park. These are the
+  rules that actually change our decisions. Read them once and the rest of the playbook makes
+  sense.</p>
+  <ol class="pb-rules">
+    {% for title, body in rules %}
+      <li><b>{{ title|safe }}</b><p>{{ body|safe }}</p></li>
+    {% endfor %}
+  </ol>
+</section>
+
+<section id="pregame" class="pb-sec">
+  <h2>▸ pre-game checklist</h2>
+  <p class="pb-sub-p">Do this in the parking lot, not on the field. Every one of these is a
+  penalty or a delay.</p>
+  <ul class="pb-check">
+    {% for c in pregame %}<li>{{ c|safe }}</li>{% endfor %}
+  </ul>
+</section>
+
+<section id="personnel" class="pb-sec">
+  <h2>▸ who plays where</h2>
+  <p class="pb-sub-p">Seven spots on offense, seven on defense. Learn your letter, because
+  every play in this book is written to it. The line rule never changes, <strong>C, X, Y and Z
+  are on the line of scrimmage, and QB, H and R are off it</strong>. That keeps us legal on
+  every snap and it makes H our only motion man.</p>
+  {% include "playbook/_table.html" with t=t_offpos %}
+  {% include "playbook/_table.html" with t=t_defpos %}
+</section>
+
+<section id="formations" class="pb-sec">
+  <h2>▸ five formations</h2>
+  <p class="pb-sub-p">Every play in this book comes out of one of these. Say the formation and
+  then the play, &ldquo;Deuce Smash&rdquo;. Add &ldquo;Left&rdquo; to flip any three receiver
+  call.</p>
+  {% for f in formations %}
+    <div class="pb-form">
+      <div class="pb-form-hd"><h3>{{ f.name }}</h3><span>{{ f.sub|safe }}</span></div>
+      <div class="pb-form-bd">
+        <div class="pb-fig">{{ f.svg|safe }}</div>
+        <p>{{ f.text|safe }}</p>
+        <p class="pb-who">{{ f.who|safe }}</p>
+      </div>
+    </div>
+  {% endfor %}
+</section>
+
+<section id="penalties" class="pb-sec">
+  <h2>▸ penalties, what they cost</h2>
+  <p class="pb-sub-p">Almost every one of these is avoidable. The three that will actually
+  cost us games are the one second freeze, hands on a block, and flag guarding.</p>
+  <h3 class="pb-h3">Five yards</h3>
+  {% include "playbook/_table.html" with t=t_pen5 %}
+  <h3 class="pb-h3">Ten yards</h3>
+  {% include "playbook/_table.html" with t=t_pen10 %}
+  <p class="pb-sub-p">Four things get you thrown out rather than just penalised. Kicking or
+  striking at someone, verbal or physical abuse of an official or a player, tackling or
+  throwing a player to the ground, and deliberately tampering with a flag belt.</p>
+</section>
+
+<section id="drills" class="pb-sec">
+  <h2>▸ drills</h2>
+  <p class="pb-sub-p">Six drills, and the first three fix more of our problems than any new
+  play will.</p>
+  {% for name, when, how in drills %}
+    <div class="pb-card">
+      <h3>{{ name }} <span class="pb-drill-when">{{ when }}</span></h3>
+      <p>{{ how|safe }}</p>
+    </div>
+  {% endfor %}
+</section>
+
+<section id="glossary" class="pb-sec">
+  <h2>▸ glossary</h2>
+  <p class="pb-sub-p">Every word in this playbook that is not plain English. Tap one to open
+  it, or hit the explain button in the bar above to open all of them at once.</p>
+  <div class="pb-gloss">
+    {% for term, meaning in glossary %}
+      <details class="pb-basics pb-gterm">
+        <summary>{{ term }}</summary>
+        <p>{{ meaning|safe }}</p>
+      </details>
+    {% endfor %}
+  </div>
+</section>
+
+<section id="practice" class="pb-sec">
+  <h2>▸ practice plan</h2>
+  <p class="pb-sub-p">Ten plays we know cold beat thirty we half know. This is the order.</p>
+  <div class="pb-grid2">
+    {% for title, body in install %}
+      <div class="pb-card"><h3>{{ title }}</h3>{{ body|safe }}</div>
+    {% endfor %}
+  </div>
+  <div class="pb-card pb-accent">
+    <h3>The eight everyone has to know cold</h3>
+    <p><strong>Offense.</strong> {{ core_off }}</p>
+    <p><strong>Defense.</strong> {{ core_def }}</p>
+  </div>
+</section>
+
+{% endblock %}

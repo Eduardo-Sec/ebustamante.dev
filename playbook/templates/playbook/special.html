@@ -1,0 +1,37 @@
+{% extends "playbook/_base.html" %}
+
+{% block pb_content %}
+
+<section id="punt" class="pb-sec">
+  <h2>▸ punting</h2>
+  <p class="pb-sub-p">There are no kickoffs in this league at all, so the punt is the only
+  kicking play we have. It comes with more rules than anything else in the book.</p>
+  <ul class="pb-bul pb-card">{% for line in punt_rules %}<li>{{ line|safe }}</li>{% endfor %}</ul>
+
+  <h3 class="pb-h3">Punt or go for it</h3>
+  <p class="pb-sub-p">We get four downs to gain twenty yards, so a punt gives away a down we
+  might have used. The policy is simple.</p>
+  {% include "playbook/_table.html" with t=t_punt %}
+</section>
+
+<section id="pat" class="pb-sec">
+  <h2>▸ the extra point</h2>
+  <p class="pb-sub-p">This is where intramural games get won and lost, and most teams never
+  look at it.</p>
+  <ul class="pb-bul pb-card">{% for line in pat_notes %}<li>{{ line|safe }}</li>{% endfor %}</ul>
+  {% include "playbook/_table.html" with t=t_pat %}
+</section>
+
+<section id="clock" class="pb-sec">
+  <h2>▸ clock and overtime</h2>
+  <ul class="pb-bul pb-card">{% for line in clock_notes %}<li>{{ line|safe }}</li>{% endfor %}</ul>
+</section>
+
+<section id="calls" class="pb-sec">
+  <h2>▸ the call sheet</h2>
+  <p class="pb-sub-p">The field is only eighty yards between the goal lines and it is split into
+  four twenty yard zones, so where we stand matters more here than it does in a normal game.</p>
+  {% include "playbook/_table.html" with t=t_situ %}
+</section>
+
+{% endblock %}

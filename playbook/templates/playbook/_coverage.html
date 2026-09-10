@@ -1,0 +1,37 @@
+<article class="pb-play" id="d-{{ c.id }}">
+  <div class="pb-play-hd">
+    <div class="pb-tags">
+      {% for t in c.tags %}<span{% if forloop.first %} class="on"{% endif %}>{{ t|safe }}</span>{% endfor %}
+    </div>
+    <h3>{{ c.name|safe }} <span class="pb-sub">{{ c.sub|safe }}</span>
+      <a class="pb-anchor" href="#d-{{ c.id }}" aria-label="link to this coverage">#</a></h3>
+    <p class="pb-call">&ldquo;{{ c.name|safe }}&rdquo;</p>
+  </div>
+  <div class="pb-play-bd">
+    <div class="pb-fig">{{ c.svg|safe }}</div>
+
+    {% include "playbook/_assign.html" with rows=c.assign %}
+
+    <button type="button" class="pb-tog" aria-expanded="true">the rest of the call</button>
+    <div class="pb-more">
+
+    {% if c.basics %}
+      <details class="pb-basics">
+        <summary>never played? read this first</summary>
+        <p>{{ c.basics|safe }}</p>
+      </details>
+    {% endif %}
+
+    <p class="pb-why">{{ c.idea|safe }}</p>
+    <div class="pb-meta">
+      <div><b>Where it is soft</b><p>{{ c.weak|safe }}</p></div>
+      <div><b>When we call it</b><p>{{ c.call|safe }}</p></div>
+    </div>
+    {% if beaten_by %}
+      <p class="pb-xlink"><b>What beats it.</b>
+        {% for name, pid in beaten_by %}<a href="{% url 'playbook:offense' %}#p-{{ pid }}">{{ name|safe }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}
+      </p>
+    {% endif %}
+    </div>
+  </div>
+</article>

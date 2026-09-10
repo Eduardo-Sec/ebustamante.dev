@@ -1,0 +1,41 @@
+<article class="pb-play" id="p-{{ p.id }}"
+         data-depth="{{ p.depth }}" data-family="{{ p.family }}" data-form="{{ p.form }}"
+         data-beats="{{ p.f_beats }}" data-situ="{{ p.f_situ }}">
+  <div class="pb-play-hd">
+    <div class="pb-tags">
+      {% if p.depth %}<span class="on">{{ p.depth }}</span>{% endif %}
+      {% if p.family %}<span class="fam">{{ p.family }}</span>{% endif %}
+      {% for t in p.tags %}<span>{{ t|safe }}</span>{% endfor %}
+    </div>
+    <h3>{{ p.name|safe }} <a class="pb-anchor" href="#p-{{ p.id }}" aria-label="link to this play">#</a></h3>
+    <p class="pb-call">{{ p.call|safe }}</p>
+  </div>
+  <div class="pb-play-bd">
+    <div class="pb-fig">{{ p.svg|safe }}</div>
+
+    {% include "playbook/_assign.html" with rows=p.assign %}
+
+    <button type="button" class="pb-tog" aria-expanded="true">the rest of the play</button>
+    <div class="pb-more">
+
+    {% if p.basics %}
+      <details class="pb-basics">
+        <summary>never played? read this first</summary>
+        <p>{{ p.basics|safe }}</p>
+      </details>
+    {% endif %}
+
+    <p class="pb-why">{{ p.why|safe }}</p>
+    {% if p.legal %}<div class="pb-legal">{{ p.legal|safe }}</div>{% endif %}
+    <div class="pb-meta">
+      <div><b>Call it when</b><p>{{ p.when|safe }}</p></div>
+      {% if p.read %}<div><b>What the QB reads</b><p>{{ p.read|safe }}</p></div>{% endif %}
+      {% if p.time %}<div><b>Timing</b><p>{{ p.time|safe }}</p></div>{% endif %}
+      {% if p.beats %}
+        <div><b>Good against</b><p>{% for b in p.beats %}{{ b }}{% if not forloop.last %}, {% endif %}{% endfor %}</p></div>
+      {% endif %}
+    </div>
+    <p class="pb-coach">{{ p.coach|safe }}</p>
+    </div>
+  </div>
+</article>

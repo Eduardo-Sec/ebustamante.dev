@@ -1,0 +1,10 @@
+<div class="pb-tw">
+  <table>
+    <thead><tr>{% for h in t.heads %}<th>{{ h|safe }}</th>{% endfor %}</tr></thead>
+    <tbody>
+      {% for row in t.rows %}
+        <tr>{% for label, cell in row %}<td data-label="{{ label|safe }}">{{ cell|safe }}</td>{% endfor %}</tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>

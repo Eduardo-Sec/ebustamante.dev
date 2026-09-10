@@ -1,0 +1,5 @@
+<div class="pb-pairs">
+  {% for head, body in rows %}
+    <div class="pb-pair"><h4>{{ head|safe }}</h4><p>{{ body|safe }}</p></div>
+  {% endfor %}
+</div>

@@ -1,0 +1,68 @@
+{% extends "playbook/_base.html" %}
+
+{% block pb_content %}
+
+<section id="routes" class="pb-sec">
+  <h2>▸ route depths and when to break</h2>
+  <p class="pb-sub-p">A route is a promise about where you will be and when. If you run a dig at
+  9 yards and the quarterback threw it to 12, that is on you and not on him. Learn these
+  cold.</p>
+  {% include "playbook/_table.html" with t=t_routes %}
+
+  <h3 class="pb-h3">Six rules for every route</h3>
+  {% include "playbook/_pairs.html" with rows=route_rules %}
+
+  <h3 class="pb-h3">Conversions, when the route changes itself</h3>
+  <p class="pb-sub-p">These are automatic. Nobody calls them, you see it and you do it, and the
+  quarterback is looking for exactly the same thing.</p>
+  {% include "playbook/_table.html" with t=t_convert %}
+</section>
+
+<section id="plays" class="pb-sec">
+  <h2>▸ the plays</h2>
+  <p class="pb-sub-p">Twenty two calls including the trick plays, grouped by what they are
+  for. You do not need all of them, you need your job on the eight we call most. Use the
+  filter to cut the list down to the ones that matter for a situation.</p>
+  {% include "playbook/_filterbar.html" %}
+  {% for group, items in groups %}
+    <section class="pb-pgroup">
+      <h3 class="pb-group">{{ group }}</h3>
+      {% for p in items %}{% include "playbook/_play.html" %}{% endfor %}
+    </section>
+  {% endfor %}
+</section>
+
+<section id="trick" class="pb-sec">
+  <h2>▸ trick plays</h2>
+  <p class="pb-sub-p">These are unusually safe in this league. Only one forward pass is allowed
+  per down, but backward pitches are unlimited, and a dropped pitch is a dead ball that
+  <strong>we keep</strong> rather than a turnover. The worst realistic outcome on any of these
+  is a loss of yards. The rules reasoning is spelled out on each one so we can explain it to
+  the referee if he asks.</p>
+  <div class="pb-note">One per game, maximum two. Every one of these works because it looks
+  like a play we have already run for real yards, so run the real play first.</div>
+  <section class="pb-pgroup">
+    {% for p in tricks %}{% include "playbook/_play.html" %}{% endfor %}
+  </section>
+</section>
+
+<section id="reading" class="pb-sec">
+  <h2>▸ reading the defense</h2>
+  <p class="pb-sub-p">Mostly for the quarterback, but every receiver should read it. If you know
+  the coverage you know whether to settle in a window or keep running, and that decision is
+  worth more than your speed.</p>
+
+  <h3 class="pb-h3">The pre-snap ladder, five seconds, in this order</h3>
+  <ol class="pb-rules">
+    {% for title, body in qb_ladder %}<li><b>{{ title|safe }}</b><p>{{ body|safe }}</p></li>{% endfor %}
+  </ol>
+
+  {% include "playbook/_table.html" with t=t_qbread %}
+
+  <div class="pb-card">
+    <h3>After the snap</h3>
+    <ul class="pb-bul">{% for line in qb_post_snap %}<li>{{ line|safe }}</li>{% endfor %}</ul>
+  </div>
+</section>
+
+{% endblock %}
