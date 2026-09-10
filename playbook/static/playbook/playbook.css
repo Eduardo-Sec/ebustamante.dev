@@ -4,18 +4,25 @@
 
 :root {
   --pb-bg:      var(--bg, #0a0d0b);
-  --pb-panel:   var(--bg-card, #0d1210);
-  --pb-panel-2: #101715;
+  /* Deliberately NOT chained to --bg-card. The site's own card colour is only
+     3-5 RGB units off --bg, which reads as one flat black field once this app's
+     content gets dense. Cards need real separation, so this breaks the chain the
+     same way --pb-muted already does, on purpose, for the same kind of reason. */
+  --pb-panel:   #141b17;
+  --pb-panel-2: #1a2320;
   --pb-ac:      var(--ac-bright, var(--ac, #10b981));
   --pb-ac-dim:  var(--ac-dim, #0d8f65);
   --pb-gold:    var(--gold-bright, var(--gold, #c9a227));
+  --pb-warn:    var(--warn, #f59e0b);
+  --pb-warn-bg: var(--warn-bg, #241a0a);
+  --pb-info:    var(--info, #38bdf8);
   --pb-text:    var(--text-primary, #ffffff);
   /* Deliberately NOT chained to --text-dim. Emerald is a fill, a border and a
      highlight in this app, never a text colour, so the greys stay neutral. */
   --pb-muted:   #9aa0a2;
   --pb-label:   #b7bcbe;
-  --pb-line:    rgba(16, 185, 129, .18);
-  --pb-line-2:  rgba(255, 255, 255, .08);
+  --pb-line:    rgba(16, 185, 129, .32);
+  --pb-line-2:  rgba(255, 255, 255, .16);
 }
 
 .pb-body {
@@ -27,6 +34,19 @@
   -webkit-text-size-adjust: 100%;
 }
 * { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+.pb-skip {
+  position: absolute; top: -48px; left: 12px; z-index: 100;
+  background: var(--pb-panel); color: var(--pb-text);
+  border: 1px solid var(--pb-line); border-radius: 8px;
+  padding: 10px 16px; font-size: 14px; font-weight: 650;
+  text-decoration: none; transition: top .15s ease;
+}
+.pb-skip:focus { top: 12px; }
+.pb-skip:focus-visible { outline: 2px solid var(--pb-ac); outline-offset: 2px; }
+#pbmain:focus { outline: none; }
 
 .pb {
   max-width: 900px;
@@ -229,9 +249,14 @@ ul.pb-bul.pb-card { padding-left: 36px; }
 .pb-meta div + div { margin-top: 9px; }
 .pb-meta b { display: block; font-size: 12.5px; color: var(--pb-label); letter-spacing: .03em; }
 .pb-meta p { margin: 1px 0 0; font-size: 15px; }
+/* Info blue, not the standard label grey, so a situational read stands apart
+   from "call it when" and the rest of the meta block. */
+.pb-meta-read > b { color: var(--pb-info); }
+/* Warn, not gold, because this is rule/penalty risk (roughing the passer, an
+   automatic first down) rather than a tactical call. */
 .pb-legal {
-  font-size: 14.5px; border-left: 2px solid var(--pb-gold);
-  background: rgba(201, 162, 39, .07); padding: 11px 14px;
+  font-size: 14.5px; border-left: 2px solid var(--pb-warn);
+  background: var(--pb-warn-bg); padding: 11px 14px;
   border-radius: 0 8px 8px 0; margin: 14px 0;
 }
 .pb-coach {
@@ -320,7 +345,10 @@ ul.pb-bul.pb-card { padding-left: 36px; }
   .pb-play, .pb-card, .pb-form, .pb-tw { break-inside: avoid; }
 }
 
-@media (prefers-reduced-motion: reduce) { .pb * { transition: none !important; } }
+@media (prefers-reduced-motion: reduce) {
+  .pb * { transition: none !important; }
+  html { scroll-behavior: auto; }
+}
 
 
 /* toolbar ----------------------------------------------------------------- */

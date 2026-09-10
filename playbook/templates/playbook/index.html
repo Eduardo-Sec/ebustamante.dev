@@ -14,31 +14,13 @@
     <p>We get four tries, called downs, to move the ball twenty yards. Get there and we get
     four more. Fail and the other team takes over. That is the entire game.</p>
     <p>Your position is a letter. Find it in the bar above, tap it, and every instruction
-    written for you will light up on all five pages. The glossary near the bottom of this
-    page explains any word you hit that you do not know.</p>
+    written for you will light up on all seven pages. The rules that actually change how we
+    play live on their own page now, and the glossary is its own page too, for any word you
+    hit that you do not know.</p>
   </div>
 </details>
 
-<section id="rules" class="pb-sec">
-  <h2>▸ sixteen rules that change how we play</h2>
-  <p class="pb-sub-p">This is not the flag football you have played at a park. These are the
-  rules that actually change our decisions. Read them once and the rest of the playbook makes
-  sense.</p>
-  <ol class="pb-rules">
-    {% for title, body in rules %}
-      <li><b>{{ title|safe }}</b><p>{{ body|safe }}</p></li>
-    {% endfor %}
-  </ol>
-</section>
-
-<section id="pregame" class="pb-sec">
-  <h2>▸ pre-game checklist</h2>
-  <p class="pb-sub-p">Do this in the parking lot, not on the field. Every one of these is a
-  penalty or a delay.</p>
-  <ul class="pb-check">
-    {% for c in pregame %}<li>{{ c|safe }}</li>{% endfor %}
-  </ul>
-</section>
+{% include "playbook/_jumpindex.html" %}
 
 <section id="personnel" class="pb-sec">
   <h2>▸ who plays where</h2>
@@ -69,19 +51,6 @@
   </div>
 </section>
 
-<section id="penalties" class="pb-sec">
-  <h2>▸ penalties, what they cost</h2>
-  <p class="pb-sub-p">Almost every one of these is avoidable. The three that will actually
-  cost us games are the one second freeze, hands on a block, and flag guarding.</p>
-  <h3 class="pb-h3">Five yards</h3>
-  {% include "playbook/_table.html" with t=t_pen5 %}
-  <h3 class="pb-h3">Ten yards</h3>
-  {% include "playbook/_table.html" with t=t_pen10 %}
-  <p class="pb-sub-p">Four things get you thrown out rather than just penalised. Kicking or
-  striking at someone, verbal or physical abuse of an official or a player, tackling or
-  throwing a player to the ground, and deliberately tampering with a flag belt.</p>
-</section>
-
 <section id="drills" class="pb-sec">
   <h2>▸ drills</h2>
   <p class="pb-sub-p">Six drills, and the first three fix more of our problems than any new
@@ -92,20 +61,6 @@
         <h3>{{ name }} <span class="pb-drill-when">{{ when }}</span></h3>
         <p>{{ how|safe }}</p>
       </div>
-    {% endfor %}
-  </div>
-</section>
-
-<section id="glossary" class="pb-sec">
-  <h2>▸ glossary</h2>
-  <p class="pb-sub-p">Every word in this playbook that is not plain English. Tap one to open
-  it, or hit the explain button in the bar above to open all of them at once.</p>
-  <div class="pb-gloss">
-    {% for term, meaning in glossary %}
-      <details class="pb-basics pb-gterm">
-        <summary>{{ term }}</summary>
-        <p>{{ meaning|safe }}</p>
-      </details>
     {% endfor %}
   </div>
 </section>

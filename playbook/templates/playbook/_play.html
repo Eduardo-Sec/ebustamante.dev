@@ -29,7 +29,7 @@
     {% if p.legal %}<div class="pb-legal">{{ p.legal|safe }}</div>{% endif %}
     <div class="pb-meta">
       <div><b>Call it when</b><p>{{ p.when|safe }}</p></div>
-      {% if p.read %}<div><b>What the QB reads</b><p>{{ p.read|safe }}</p></div>{% endif %}
+      {% if p.read %}<div class="pb-meta-read"><b>What the QB reads</b><p>{{ p.read|safe }}</p></div>{% endif %}
       {% if p.time %}<div><b>Timing</b><p>{{ p.time|safe }}</p></div>{% endif %}
       {% if p.beats %}
         <div><b>Good against</b><p>{% for b in p.beats %}{{ b }}{% if not forloop.last %}, {% endif %}{% endfor %}</p></div>
