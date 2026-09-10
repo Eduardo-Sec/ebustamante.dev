@@ -1,0 +1,19 @@
+{% extends "playbook/_base.html" %}
+
+{% block pb_content %}
+
+<section id="glossary" class="pb-sec">
+  <h2>▸ glossary</h2>
+  <p class="pb-sub-p">Every word in this playbook that is not plain English. Tap one to open
+  it, or hit the explain button in the bar above to open all of them at once.</p>
+  <div class="pb-gloss">
+    {% for term, meaning in glossary %}
+      <details class="pb-basics pb-gterm">
+        <summary>{{ term }}</summary>
+        <p>{{ meaning|safe }}</p>
+      </details>
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}

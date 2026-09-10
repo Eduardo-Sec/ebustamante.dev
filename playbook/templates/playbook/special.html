@@ -4,27 +4,20 @@
 
 <section id="punt" class="pb-sec">
   <h2>▸ punting</h2>
-  <p class="pb-sub-p">There are no kickoffs in this league at all, so the punt is the only
-  kicking play we have. It comes with more rules than anything else in the book.</p>
-  <ul class="pb-bul pb-card">{% for line in punt_rules %}<li>{{ line|safe }}</li>{% endfor %}</ul>
-
-  <h3 class="pb-h3">Punt or go for it</h3>
   <p class="pb-sub-p">We get four downs to gain twenty yards, so a punt gives away a down we
-  might have used. The policy is simple.</p>
+  might have used. The rules governing the punt itself are on the
+  <a href="{% url 'playbook:rules' %}#punt-rules">rules page</a>. Our own policy is
+  simple.</p>
   {% include "playbook/_table.html" with t=t_punt %}
 </section>
 
 <section id="pat" class="pb-sec">
   <h2>▸ the extra point</h2>
   <p class="pb-sub-p">This is where intramural games get won and lost, and most teams never
-  look at it.</p>
-  <ul class="pb-bul pb-card">{% for line in pat_notes %}<li>{{ line|safe }}</li>{% endfor %}</ul>
+  look at it. The scoring rules themselves are on the
+  <a href="{% url 'playbook:rules' %}#pat-rules">rules page</a>, this chart is what we
+  actually take at each score.</p>
   {% include "playbook/_table.html" with t=t_pat %}
-</section>
-
-<section id="clock" class="pb-sec">
-  <h2>▸ clock and overtime</h2>
-  <ul class="pb-bul pb-card">{% for line in clock_notes %}<li>{{ line|safe }}</li>{% endfor %}</ul>
 </section>
 
 <section id="calls" class="pb-sec">

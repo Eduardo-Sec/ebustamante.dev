@@ -6,9 +6,11 @@ from . import content, coverages, plays, tags
 
 NAV = [
     ("index", "overview", "playbook:index"),
+    ("rules", "rules", "playbook:rules"),
     ("offense", "offense", "playbook:offense"),
     ("defense", "defense", "playbook:defense"),
     ("special", "special teams", "playbook:special"),
+    ("glossary", "glossary", "playbook:glossary"),
     ("card", "game card", "playbook:card"),
 ]
 
@@ -55,28 +57,56 @@ def _base(page, title, lede):
 def index(request):
     ctx = _base(
         "index", "the playbook",
-        "Every play, every coverage, and exactly what your position does on each one, "
-        "written against our actual league rules rather than generic flag football.",
+        "Personnel, formations, the practice plan, and the drills that fix more of our "
+        "problems than any new play will. The rules that actually change how we play "
+        "have their own page now.",
     )
     ctx.update(
-        rules=content.RULES,
-        glossary=tags.GLOSSARY,
-        penalty_5=tags.PENALTY_5,
-        penalty_10=tags.PENALTY_10,
-        drills=tags.DRILLS,
-        pregame=content.PREGAME,
         off_pos=content.OFF_POS,
         def_pos=content.DEF_POS,
         formations=plays.FORMATIONS,
         t_offpos=tbl(content.H_OFF_POS, content.OFF_POS),
         t_defpos=tbl(content.H_DEF_POS, content.DEF_POS),
-        t_pen5=tbl(content.H_PENALTY, tags.PENALTY_5),
-        t_pen10=tbl(content.H_PENALTY, tags.PENALTY_10),
+        drills=tags.DRILLS,
         install=content.INSTALL,
         core_off=content.CORE_EIGHT_OFF,
         core_def=content.CORE_EIGHT_DEF,
+        jump=[("personnel", "personnel"), ("formations", "formations"),
+              ("drills", "drills"), ("practice", "practice plan")],
     )
     return render(request, "playbook/index.html", ctx)
+
+
+def rules(request):
+    ctx = _base(
+        "rules", "rules",
+        "Every real UNO rule that changes how we play, the sixteen, the pre-game "
+        "checklist, the penalties, and the punting, extra point and clock rules, "
+        "gathered in one place instead of spread across three pages.",
+    )
+    ctx.update(
+        rules=content.RULES,
+        pregame=content.PREGAME,
+        t_pen5=tbl(content.H_PENALTY, tags.PENALTY_5),
+        t_pen10=tbl(content.H_PENALTY, tags.PENALTY_10),
+        punt_rules=content.PUNT_RULES,
+        pat_notes=content.PAT_NOTES,
+        clock_notes=content.CLOCK_NOTES,
+        jump=[("rules", "the sixteen rules"), ("pregame", "pre-game checklist"),
+              ("penalties", "penalties"), ("punt-rules", "punting"),
+              ("pat-rules", "extra point"), ("clock-rules", "clock and overtime")],
+    )
+    return render(request, "playbook/rules.html", ctx)
+
+
+def glossary(request):
+    ctx = _base(
+        "glossary", "glossary",
+        "Every word in this playbook that is not plain English, in one place so it "
+        "stops taking up a third of the overview page.",
+    )
+    ctx.update(glossary=tags.GLOSSARY)
+    return render(request, "playbook/glossary.html", ctx)
 
 
 def offense(request):
@@ -130,18 +160,16 @@ def defense(request):
 def special(request):
     ctx = _base(
         "special", "special teams and situations",
-        "Punting, the extra point maths, the clock, and what we call from every spot on "
-        "the field.",
+        "The calls we make on top of the league's kicking, scoring and clock rules, "
+        "punt or go for it, the extra point chart, and what we call from every spot on "
+        "the field. The rules themselves are on the rules page.",
     )
     ctx.update(
-        punt_rules=content.PUNT_RULES,
         t_punt=tbl(content.H_PUNT, content.PUNT_POLICY),
         t_pat=tbl(content.H_PAT, content.PAT_ROWS),
         t_situ=tbl(content.H_SITU, content.SITU_ROWS),
         punt_policy=content.PUNT_POLICY,
         pat_rows=content.PAT_ROWS,
-        pat_notes=content.PAT_NOTES,
-        clock_notes=content.CLOCK_NOTES,
         situ_rows=content.SITU_ROWS,
     )
     return render(request, "playbook/special.html", ctx)

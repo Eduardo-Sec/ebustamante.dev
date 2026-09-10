@@ -1,0 +1,63 @@
+{% extends "playbook/_base.html" %}
+
+{% block pb_content %}
+
+{% include "playbook/_jumpindex.html" %}
+
+<section id="rules" class="pb-sec">
+  <h2>▸ sixteen rules that change how we play</h2>
+  <p class="pb-sub-p">This is not the flag football you have played at a park. These are the
+  rules that actually change our decisions. Read them once and the rest of the playbook makes
+  sense.</p>
+  <ol class="pb-rules">
+    {% for title, body in rules %}
+      <li><b>{{ title|safe }}</b><p>{{ body|safe }}</p></li>
+    {% endfor %}
+  </ol>
+</section>
+
+<section id="pregame" class="pb-sec">
+  <h2>▸ pre-game checklist</h2>
+  <p class="pb-sub-p">Do this in the parking lot, not on the field. Every one of these is a
+  penalty or a delay.</p>
+  <ul class="pb-check">
+    {% for c in pregame %}<li>{{ c|safe }}</li>{% endfor %}
+  </ul>
+</section>
+
+<section id="penalties" class="pb-sec">
+  <h2>▸ penalties, what they cost</h2>
+  <p class="pb-sub-p">Almost every one of these is avoidable. The three that will actually
+  cost us games are the one second freeze, hands on a block, and flag guarding.</p>
+  <h3 class="pb-h3">Five yards</h3>
+  {% include "playbook/_table.html" with t=t_pen5 %}
+  <h3 class="pb-h3">Ten yards</h3>
+  {% include "playbook/_table.html" with t=t_pen10 %}
+  <p class="pb-sub-p">Four things get you thrown out rather than just penalised. Kicking or
+  striking at someone, verbal or physical abuse of an official or a player, tackling or
+  throwing a player to the ground, and deliberately tampering with a flag belt.</p>
+</section>
+
+<section id="punt-rules" class="pb-sec">
+  <h2>▸ punting</h2>
+  <p class="pb-sub-p">There are no kickoffs in this league at all, so the punt is the only
+  kicking play we have. It comes with more rules than anything else in the book. Our own
+  punt or go for it policy is on the
+  <a href="{% url 'playbook:special' %}#punt">special teams page</a>.</p>
+  <ul class="pb-bul pb-card">{% for line in punt_rules %}<li>{{ line|safe }}</li>{% endfor %}</ul>
+</section>
+
+<section id="pat-rules" class="pb-sec">
+  <h2>▸ the extra point</h2>
+  <p class="pb-sub-p">This is where intramural games get won and lost, and most teams never
+  look at it. Our own scoring decision chart is on the
+  <a href="{% url 'playbook:special' %}#pat">special teams page</a>.</p>
+  <ul class="pb-bul pb-card">{% for line in pat_notes %}<li>{{ line|safe }}</li>{% endfor %}</ul>
+</section>
+
+<section id="clock-rules" class="pb-sec">
+  <h2>▸ clock and overtime</h2>
+  <ul class="pb-bul pb-card">{% for line in clock_notes %}<li>{{ line|safe }}</li>{% endfor %}</ul>
+</section>
+
+{% endblock %}

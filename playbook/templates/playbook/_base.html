@@ -26,6 +26,8 @@
 </head>
 <body class="pb-body">
 
+<a class="pb-skip" href="#pbmain">skip to content</a>
+
 <div class="pb">
 
   <header class="pb-top">
@@ -82,7 +84,9 @@
     that also hides everybody else's assignments so each card shows only your job.</span>
   </div>
 
+  <main id="pbmain" tabindex="-1">
   {% block pb_content %}{% endblock %}
+  </main>
 
   <nav class="pb-pager">
     {% if pb_prev %}<a href="{% url pb_prev.2 %}" class="prev">← {{ pb_prev.1 }}</a>{% else %}<span></span>{% endif %}

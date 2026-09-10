@@ -1,0 +1,8 @@
+<details class="pb-index">
+  <summary>jump to a section</summary>
+  <div class="pb-index-body">
+    {% for anchor, label in jump %}
+      <a class="pb-idx" href="#{{ anchor }}">{{ label }}</a>
+    {% endfor %}
+  </div>
+</details>
