@@ -333,4 +333,88 @@
       });
     }
   }());
+
+  /* --------------------------------------------------- 7. custom cursor */
+  (function cursor() {
+    /* Matches main.js's implementation so a reader moving between the main
+       site and the playbook sees the same pointer. Self contained, no
+       dependency on main.js or anything outside this page, because the
+       #cursor-* CSS rules and the (pointer: coarse) fallback that restores
+       the native cursor on touch devices already ship in main.css. */
+    if (window.matchMedia("(pointer: coarse)").matches) { return; }
+
+    var dot = document.getElementById("cursor-dot");
+    var bracket = document.getElementById("cursor-bracket");
+    var dataEl = document.getElementById("cursor-data");
+    var valX = document.getElementById("val-x");
+    var valY = document.getElementById("val-y");
+    if (!dot || !bracket || !dataEl || !valX || !valY) { return; }
+
+    document.body.style.cursor = "none";
+
+    var mouseX = 0, mouseY = 0, dataX = 0, dataY = 0;
+
+    function pad(n) { return String(Math.round(n)).padStart(4, "0"); }
+
+    document.addEventListener("mousemove", function (e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      dot.style.left = mouseX + "px";
+      dot.style.top = mouseY + "px";
+      bracket.style.left = mouseX + "px";
+      bracket.style.top = mouseY + "px";
+      valX.textContent = pad(mouseX);
+      valY.textContent = pad(mouseY);
+    });
+
+    function lerp(a, b, t) { return a + (b - a) * t; }
+
+    function animate() {
+      dataX = lerp(dataX, mouseX, 0.15);
+      dataY = lerp(dataY, mouseY, 0.15);
+      dataEl.style.left = dataX + "px";
+      dataEl.style.top = dataY + "px";
+      window.requestAnimationFrame(animate);
+    }
+    animate();
+
+    document.addEventListener("mouseleave", function () {
+      dot.style.opacity = "0";
+      dataEl.style.opacity = "0";
+      bracket.style.opacity = "0";
+    });
+
+    document.addEventListener("mouseenter", function (e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      dot.style.left = mouseX + "px";
+      dot.style.top = mouseY + "px";
+      bracket.style.left = mouseX + "px";
+      bracket.style.top = mouseY + "px";
+      dataX = mouseX;
+      dataY = mouseY;
+      dot.style.opacity = "1";
+      dataEl.style.opacity = "1";
+      bracket.style.opacity = "1";
+    });
+
+    document.addEventListener("mousedown", function () {
+      dot.style.transform = "translate(-50%, -50%) scale(2.5)";
+    });
+
+    document.addEventListener("mouseup", function () {
+      dot.style.transform = "translate(-50%, -50%) scale(1)";
+    });
+
+    Array.prototype.forEach.call(root.querySelectorAll("a, button"), function (el) {
+      el.addEventListener("mouseenter", function () {
+        dot.style.transform = "translate(-50%, -50%) scale(2.5)";
+        dot.style.background = "#34d399";
+      });
+      el.addEventListener("mouseleave", function () {
+        dot.style.transform = "translate(-50%, -50%) scale(1)";
+        dot.style.background = "#059669";
+      });
+    });
+  }());
 }());
