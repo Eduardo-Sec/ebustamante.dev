@@ -32,8 +32,15 @@
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
+  /* Custom hover/active/focus states already exist on every control, so the
+     default grey tap flash on mobile just looks dated on top of them. */
+  -webkit-tap-highlight-color: transparent;
 }
 * { box-sizing: border-box; }
+
+/* Every button and link gets its own hover state below, so skip the ~300ms
+   mobile tap delay browsers otherwise wait to rule out a double tap. */
+.pb button, .pb a { touch-action: manipulation; }
 
 html { scroll-behavior: smooth; }
 
@@ -67,6 +74,7 @@ html { scroll-behavior: smooth; }
   color: var(--pb-text); font-weight: 700; text-decoration: none; font-size: 16px;
 }
 .pb-brand:hover { text-decoration: underline; }
+.pb-brand-text { transition: color .18s ease; }
 .pb-brand:hover .pb-brand-text { color: var(--pb-gold); }
 .pb-brand-mark circle:first-child { fill: var(--pb-ac); }
 .pb-brand-mark circle:not(:first-child),
@@ -82,7 +90,7 @@ html { scroll-behavior: smooth; }
 
 .pb h1, .pb h2, .pb h3, .pb h4 { line-height: 1.12; margin: 0; }
 .pb p { margin: .6em 0; }
-.pb a { color: var(--pb-text); text-decoration-color: var(--pb-line-2); }
+.pb a { color: var(--pb-text); text-decoration-color: var(--pb-line-2); transition: color .18s ease; }
 .pb a:hover { color: var(--pb-gold); text-decoration-color: currentColor; }
 .pb strong { color: var(--pb-text); font-weight: 650; }
 
@@ -109,6 +117,7 @@ html { scroll-behavior: smooth; }
 .pb-tabs a {
   color: var(--pb-muted); text-decoration: none; font-size: 14.5px;
   padding: 5px 12px; border-radius: 999px; border: 1px solid transparent;
+  transition: color .18s ease, border-color .18s ease, background .18s ease;
 }
 .pb-tabs a:hover { color: var(--pb-text); border-color: var(--pb-line); }
 .pb-tabs a.on { color: var(--pb-bg); background: var(--pb-ac); font-weight: 650; }
@@ -135,6 +144,7 @@ html { scroll-behavior: smooth; }
   flex: 0 0 auto; font: inherit; font-size: 14px; font-weight: 650; cursor: pointer;
   background: transparent; color: var(--pb-text);
   border: 1px solid var(--pb-line-2); border-radius: 999px; padding: 4px 12px;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
 }
 .pb-chip:hover { border-color: var(--pb-ac); }
 .pb-chip:focus-visible { outline: 2px solid var(--pb-ac); outline-offset: 2px; }
@@ -175,6 +185,7 @@ html { scroll-behavior: smooth; }
 .pb-card {
   background: var(--pb-panel); border: 1px solid var(--pb-line-2);
   border-radius: 10px; padding: 16px 18px; margin: 16px 0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .35), 0 6px 16px rgba(0, 0, 0, .22);
 }
 .pb-card h3 { font-size: 17px; margin-bottom: 4px; }
 .pb-card p { color: var(--pb-muted); font-size: 15.5px; }
@@ -212,6 +223,7 @@ ul.pb-bul.pb-card { padding-left: 36px; }
 .pb-form {
   background: var(--pb-panel); border: 1px solid var(--pb-line-2);
   border-radius: 10px; margin: 16px 0; overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .35), 0 6px 16px rgba(0, 0, 0, .22);
 }
 .pb-form-hd { padding: 13px 16px 10px; border-bottom: 1px solid var(--pb-line-2); }
 .pb-form-hd h3 { display: inline; font-size: 19px; }
@@ -228,6 +240,7 @@ ul.pb-bul.pb-card { padding-left: 36px; }
   scroll-margin-top: 96px;   /* clear the sticky position bar on a jump */
   background: var(--pb-panel); border: 1px solid var(--pb-line-2);
   border-radius: 10px; margin: 20px 0; overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .35), 0 8px 20px rgba(0, 0, 0, .25);
 }
 .pb-play-hd { padding: 15px 16px 13px; border-bottom: 1px solid var(--pb-line-2); }
 .pb-play-hd h3 { font-size: 22px; font-weight: 750; letter-spacing: -.015em; }
@@ -317,6 +330,7 @@ ul.pb-bul.pb-card { padding-left: 36px; }
 .pb-tw {
   overflow-x: auto; margin: 18px 0; border: 1px solid var(--pb-line-2);
   border-radius: 9px; background: var(--pb-panel);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .35), 0 6px 16px rgba(0, 0, 0, .22);
 }
 .pb-tw table { border-collapse: collapse; width: 100%; font-size: 14.5px; min-width: 540px; }
 .pb-tw th, .pb-tw td {
@@ -342,7 +356,9 @@ ul.pb-bul.pb-card { padding-left: 36px; }
 @media print {
   .pb-posbar, .pb-tabs, .pb-pager, .pb-hint { display: none; }
   .pb { color: #000; max-width: none; }
-  .pb-play, .pb-card, .pb-form, .pb-tw { break-inside: avoid; }
+  .pb-play, .pb-card, .pb-form, .pb-tw, .pb-minicard {
+    break-inside: avoid; box-shadow: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -357,6 +373,7 @@ ul.pb-bul.pb-card { padding-left: 36px; }
   font: inherit; font-size: 13.5px; font-weight: 650; cursor: pointer;
   background: transparent; color: var(--pb-muted);
   border: 1px solid var(--pb-line-2); border-radius: 999px; padding: 4px 12px;
+  transition: color .18s ease, border-color .18s ease, background .18s ease;
 }
 .pb-tool:hover { color: var(--pb-text); border-color: var(--pb-ac); }
 .pb-tool:focus-visible { outline: 2px solid var(--pb-ac); outline-offset: 2px; }
@@ -417,6 +434,7 @@ ul.pb-bul.pb-card { padding-left: 36px; }
   font: inherit; font-size: 13px; font-weight: 600; cursor: pointer;
   background: transparent; color: var(--pb-text);
   border: 1px solid var(--pb-line-2); border-radius: 6px; padding: 3px 10px;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
 }
 .pb-fchip:hover { border-color: var(--pb-ac); }
 .pb-fchip:focus-visible { outline: 2px solid var(--pb-ac); outline-offset: 2px; }
@@ -432,6 +450,7 @@ ul.pb-bul.pb-card { padding-left: 36px; }
 .pb-idx {
   font-size: 13px; text-decoration: none; color: var(--pb-text);
   border: 1px solid var(--pb-line-2); border-radius: 6px; padding: 3px 10px;
+  transition: border-color .18s ease, color .18s ease;
 }
 .pb-idx:hover { border-color: var(--pb-gold); color: var(--pb-gold); }
 
@@ -457,6 +476,7 @@ ul.pb-bul.pb-card { padding-left: 36px; }
 .pb-minicard {
   background: var(--pb-panel); border: 1px solid var(--pb-line-2);
   border-radius: 10px; padding: 12px 14px; break-inside: avoid;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .35), 0 6px 16px rgba(0, 0, 0, .22);
 }
 .pb-minihd { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
 .pb-minihd h3 { font-size: 16.5px; }
@@ -734,7 +754,8 @@ ul.pb-bul.pb-card { padding-left: 36px; }
   font: inherit; font-size: 13.5px; font-weight: 650; cursor: pointer;
   background: transparent; color: var(--pb-muted);
   border: 1px solid var(--pb-line-2); border-radius: 999px;
-  padding: 7px 14px; margin: 14px 0 0; min-height: 38px;
+  padding: 8px 14px; margin: 14px 0 0; min-height: 44px;
+  transition: color .18s ease, border-color .18s ease;
 }
 .pb-js .pb-tog:hover { color: var(--pb-text); border-color: var(--pb-ac); }
 .pb-js .pb-tog::before { content: "▾"; color: var(--pb-muted); }
@@ -773,17 +794,25 @@ ul.pb-bul.pb-card { padding-left: 36px; }
     margin: 12px -16px 0; padding: 9px 16px;
   }
   .pb-tabs::-webkit-scrollbar { display: none; }
-  .pb-tabs a { flex: 0 0 auto; padding: 7px 13px; }
+  .pb-tabs a {
+    flex: 0 0 auto; padding: 8px 14px; min-height: 44px;
+    display: inline-flex; align-items: center;
+  }
 
   .pb-posbar {
     margin: 0 -16px; padding: 8px 16px 7px;
     top: 0; backdrop-filter: blur(6px);
   }
-  .pb-posrow { padding-right: 16px; }
-  .pb-chip { padding: 6px 13px; min-height: 34px; }
-  .pb-tool { padding: 7px 13px; min-height: 34px; }
-  .pb-fchip { padding: 6px 11px; min-height: 32px; }
-  .pb-idx { padding: 6px 11px; min-height: 32px; display: inline-flex; align-items: center; }
+  .pb-posrow { padding-right: 16px; gap: 8px; }
+  /* 44px is the WCAG 2.5.5 / Apple HIG touch target minimum. These sat at
+     32-34px, tuned earlier purely to buy back vertical space -- worth
+     revisiting now that reachability matters more than a few extra rows. */
+  .pb-chip { padding: 8px 14px; min-height: 44px; display: inline-flex; align-items: center; }
+  .pb-tool { padding: 8px 14px; min-height: 44px; display: inline-flex; align-items: center; }
+  .pb-fchip { padding: 8px 12px; min-height: 44px; display: inline-flex; align-items: center; }
+  .pb-idx { padding: 8px 12px; min-height: 44px; display: inline-flex; align-items: center; }
+  .pb-toolbar { gap: 10px; }
+  .pb-frow { gap: 8px; }
   .pb-hint { font-size: 13px; }
 
   /* diagrams go edge to edge, which is about twelve percent more width */
