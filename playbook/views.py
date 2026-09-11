@@ -71,8 +71,10 @@ def index(request):
         install=content.INSTALL,
         core_off=content.CORE_EIGHT_OFF,
         core_def=content.CORE_EIGHT_DEF,
-        jump=[("personnel", "personnel"), ("formations", "formations"),
-              ("drills", "drills"), ("practice", "practice plan")],
+        t_schedule=tbl(content.H_SCHEDULE, content.SCHEDULE),
+        jump=[("schedule", "schedule"), ("personnel", "personnel"),
+              ("formations", "formations"), ("drills", "drills"),
+              ("practice", "practice plan")],
     )
     return render(request, "playbook/index.html", ctx)
 

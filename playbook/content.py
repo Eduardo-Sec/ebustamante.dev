@@ -444,6 +444,12 @@ CORE_EIGHT_OFF = ("Deuce Sting, Deuce Bubble, Trey Snag, Deuce Smash, Deuce Mesh
 CORE_EIGHT_DEF = ("Cover Two, Cover Three, Cover One. If you know nothing else, know your job "
                   "in Two.")
 
+SCHEDULE = [
+    ("Pike A", "Thu Sep 24", "6:00 PM"),
+    ("Dragon Slayers", "Thu Oct 1", "7:00 PM"),
+    ("That's Not My Flag Bro", "Thu Oct 8", "7:00 PM"),
+]
+
 # Table headers, kept here so the templates stay free of layout data.
 H_OFF_POS = ("", "offense", "what the job needs")
 H_DEF_POS = ("", "defense", "what the job needs")
@@ -456,3 +462,4 @@ H_PAT = ("score situation", "take", "result")
 H_SITU = ("where we are, down and distance", "what we call", "why")
 
 H_PENALTY = ("penalty", "what it looks like")
+H_SCHEDULE = ("opponent", "date", "time")
