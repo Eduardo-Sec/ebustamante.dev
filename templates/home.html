@@ -5,7 +5,7 @@
   <div class="hero-left">
     <div class="hero-tag mono">⬡ cybersecurity engineer · SIEM &amp; compliance</div>
     <h1>Eduardo<br>Bustamante<em>.</em></h1>
-    <p class="hero-sub">Cybersecurity student at UNO and Cybersecurity Engineer Intern at Sera Digital Corp. I configure and migrate SIEM deployments, build security procedures, and help maintain CMMC compliance.</p>
+    <p class="hero-sub">Cybersecurity student at UNO and Cybersecurity Engineer Intern with the NebraskaCYBER MATRIX Program. I work in SIEM engineering, security monitoring, and detection focused blue team work.</p>
     <div class="hero-actions">
       <a href="{% url 'writeup_list' %}" class="btn-primary">View writeups</a>
       <a href="https://github.com/Eduardo-Sec" class="btn-secondary" target="_blank" rel="noopener noreferrer">GitHub →</a>
@@ -13,7 +13,7 @@
     <div class="hero-meta">
       <div class="meta-item">
         <span class="meta-label">Currently</span>
-        <span class="meta-value"><span>Cybersecurity Engineer Intern</span> · Sera Digital Corp</span>
+        <span class="meta-value"><span>Cybersecurity Engineer Intern</span> · NebraskaCYBER MATRIX</span>
       </div>
       <div class="meta-item">
         <span class="meta-label">Focus</span>
@@ -56,7 +56,7 @@
           </div>
           <div class="soc-stat">
             <div class="soc-stat-value mono" id="soc-days">0</div>
-            <div class="soc-stat-label mono">days as analyst</div>
+            <div class="soc-stat-label mono">days in security roles</div>
             <svg class="soc-sparkline" viewBox="0 0 100 24" preserveAspectRatio="none">
               <path class="spark-fill" d="M0,22 L20,20 L40,17 L60,12 L80,8 L100,3 L100,24 L0,24 Z"></path>
               <path class="spark-line" d="M0,22 L20,20 L40,17 L60,12 L80,8 L100,3"></path>
@@ -64,8 +64,8 @@
             </svg>
           </div>
           <div class="soc-stat">
-            <div class="soc-stat-value mono">{{ certs_in_progress }}</div>
-            <div class="soc-stat-label mono">certs in progress</div>
+            <div class="soc-stat-value mono">{% if github_commit_count is not None %}{{ github_commit_count }}{% else %}—{% endif %}</div>
+            <div class="soc-stat-label mono">commits, past year</div>
           </div>
           <div class="soc-stat">
             <div class="soc-stat-value mono">{{ tools_and_technologies }}</div>
@@ -74,6 +74,10 @@
         </div>
         <div class="soc-divider"></div>
         <div class="soc-feeds">
+          <div class="soc-feed-item">
+            <span class="soc-feed-status active mono">RESULT</span>
+            <span class="soc-feed-text mono">NCL Spring 2026, 31st of 3,634 teams</span>
+          </div>
           <div class="soc-feed-item">
             <span class="soc-feed-status info mono">INFO</span>
             <span class="soc-feed-text mono">GPG commit signing active</span>
@@ -92,7 +96,7 @@
           </div>
           <div class="soc-feed-item">
             <span class="soc-feed-status warn mono">WIP</span>
-            <span class="soc-feed-text mono">Proxmox P3 lab pending hardware</span>
+            <span class="soc-feed-text mono">Proxmox P3 lab online</span>
           </div>
         </div>
         <div class="soc-divider"></div>
@@ -150,13 +154,13 @@
       <a href="{% url 'writeup_list' %}" class="focus-card">
         <div class="focus-card-tag mono">Operations</div>
         <div class="focus-card-title">SOC analysis</div>
-        <div class="focus-card-desc">Alert triage, threat analysis, and incident response as part of the NebraskaCYBER MATRIX SOC program.</div>
+        <div class="focus-card-desc">Alert triage, threat analysis, and incident response across SOC and engineering roles with the NebraskaCYBER MATRIX Program.</div>
         <div class="focus-card-link mono">view writeups →</div>
       </a>
       <a href="{% url 'projects' %}" class="focus-card">
         <div class="focus-card-tag mono">Infrastructure</div>
         <div class="focus-card-title">Home lab</div>
-        <div class="focus-card-desc">Proxmox, pfSense + Suricata, isolated malware sandbox, full detection pipeline.</div>
+        <div class="focus-card-desc">Proxmox, pfSense + pfBlockerNG, Wazuh with custom pfSense decoders and rules.</div>
         <div class="focus-card-link mono">view projects →</div>
       </a>
     </div>
@@ -241,7 +245,7 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    // Days as analyst counter
+    // Days in security roles counter
     const start = new Date('{{ analyst_start_date }}');
     const days = Math.floor((new Date() - start) / (1000 * 60 * 60 * 24));
     const daysEl = document.getElementById('soc-days');
