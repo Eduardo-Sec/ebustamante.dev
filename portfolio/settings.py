@@ -94,13 +94,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Site metadata used in templates
 SITE_TITLE = 'Eduardo Bustamante'
 SITE_DESCRIPTION = (
-    'Cybersecurity student at UNO and SOC Analyst Intern. '
-    'Detection engineering, homelab builds, and CTF writeups.'
+    'Cybersecurity student at UNO and Cybersecurity Engineer Intern. '
+    'Detection engineering, homelab builds, and security writeups.'
 )
 SITE_URL = os.environ.get('SITE_URL', 'http://localhost:8000')
 
 CERTS_IN_PROGRESS = 2
-TOOLS_AND_TECHNOLOGIES = 15
+TOOLS_AND_TECHNOLOGIES = 24
 ANALYST_START_DATE = '2025-10-01'
 
 # Production security — active only when DEBUG=false (set via env on server)

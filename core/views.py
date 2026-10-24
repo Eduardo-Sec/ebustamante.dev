@@ -159,7 +159,7 @@ def humans_txt(request):
         'From: Omaha, NE\n'
         '\n'
         '/* SITE */\n'
-        'Last update: 2026/07/02\n'
+        'Last update: 2026/10/24\n'
         'Language: English\n'
         'Doctype: HTML5\n'
         'Components: Django, HTMX, mistune\n'
