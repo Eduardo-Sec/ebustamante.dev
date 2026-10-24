@@ -275,6 +275,15 @@
     bracket.style.top = mouseY + 'px';
     valX.textContent = pad(mouseX);
     valY.textContent = pad(mouseY);
+    // mouseenter (below) is what normally reveals the cursor, but it only
+    // fires when the pointer crosses in from outside the page -- it won't
+    // fire on a same-window navigation where the mouse never left the
+    // viewport, which Safari in particular doesn't paper over. mousemove
+    // fires on any real pointer activity regardless, so set opacity here
+    // too rather than depending solely on mouseenter ever firing.
+    dot.style.opacity = '1';
+    bracket.style.opacity = '1';
+    dataEl.style.opacity = '1';
   });
 
   function lerp(a, b, t) { return a + (b - a) * t; }
