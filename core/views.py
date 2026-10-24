@@ -1,5 +1,10 @@
+import json
+import urllib.error
+import urllib.request
+
 from django.shortcuts import render, get_object_or_404
 from django.conf import settings
+from django.core.cache import cache
 from django.db.models import Q
 from django.http import HttpResponse, JsonResponse
 from django.templatetags.static import static
@@ -9,6 +14,48 @@ from django.utils.safestring import mark_safe
 from .models import Tag, Writeup
 from .markdown import render_markdown
 from .ratelimit import rate_limit
+
+GITHUB_GRAPHQL_URL = 'https://api.github.com/graphql'
+GITHUB_COMMIT_COUNT_CACHE_KEY = 'github_commit_count'
+
+
+def _github_commit_count():
+    """Commits in the last year, via GitHub's GraphQL API. Cached for an
+    hour since it's an external call on the critical path of a page
+    render; returns None (never raises) if GITHUB_TOKEN isn't set or the
+    API call fails, and the template falls back to a placeholder."""
+    if not settings.GITHUB_TOKEN:
+        return None
+
+    cached = cache.get(GITHUB_COMMIT_COUNT_CACHE_KEY)
+    if cached is not None:
+        return cached
+
+    payload = json.dumps({
+        'query': (
+            'query($login: String!) { user(login: $login) '
+            '{ contributionsCollection { totalCommitContributions } } }'
+        ),
+        'variables': {'login': settings.GITHUB_USERNAME},
+    }).encode()
+    request = urllib.request.Request(
+        GITHUB_GRAPHQL_URL,
+        data=payload,
+        headers={
+            'Authorization': f'bearer {settings.GITHUB_TOKEN}',
+            'Content-Type': 'application/json',
+            'User-Agent': 'ebustamante.dev',
+        },
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=4) as response:
+            data = json.load(response)
+        count = data['data']['user']['contributionsCollection']['totalCommitContributions']
+    except (urllib.error.URLError, KeyError, TypeError, ValueError):
+        return None
+
+    cache.set(GITHUB_COMMIT_COUNT_CACHE_KEY, count, 3600)
+    return count
 
 STATIC_PAGES = [
     {'title': 'About', 'url_name': 'about'},
@@ -25,7 +72,6 @@ def _site_context():
         'site_title': settings.SITE_TITLE,
         'site_description': settings.SITE_DESCRIPTION,
         'site_url': settings.SITE_URL,
-        'certs_in_progress': settings.CERTS_IN_PROGRESS,
         'tools_and_technologies': settings.TOOLS_AND_TECHNOLOGIES,
         'analyst_start_date': settings.ANALYST_START_DATE,
     }
@@ -35,6 +81,7 @@ def home(request):
     ctx = _site_context()
     ctx['recent_writeups'] = Writeup.objects.prefetch_related('tags')[:3]
     ctx['writeup_count'] = Writeup.objects.count()
+    ctx['github_commit_count'] = _github_commit_count()
     return render(request, 'home.html', ctx)
 
 

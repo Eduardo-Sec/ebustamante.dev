@@ -64,8 +64,8 @@
             </svg>
           </div>
           <div class="soc-stat">
-            <div class="soc-stat-value mono">{{ certs_in_progress }}</div>
-            <div class="soc-stat-label mono">certs in progress</div>
+            <div class="soc-stat-value mono">{% if github_commit_count is not None %}{{ github_commit_count }}{% else %}—{% endif %}</div>
+            <div class="soc-stat-label mono">commits, past year</div>
           </div>
           <div class="soc-stat">
             <div class="soc-stat-value mono">{{ tools_and_technologies }}</div>

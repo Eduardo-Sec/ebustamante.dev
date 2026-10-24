@@ -99,9 +99,11 @@ SITE_DESCRIPTION = (
 )
 SITE_URL = os.environ.get('SITE_URL', 'http://localhost:8000')
 
-CERTS_IN_PROGRESS = 1
 TOOLS_AND_TECHNOLOGIES = 24
 ANALYST_START_DATE = '2025-10-01'
+
+GITHUB_USERNAME = 'Eduardo-Sec'
+GITHUB_TOKEN = os.environ.get('GITHUB_TOKEN', '')
 
 # Production security — active only when DEBUG=false (set via env on server)
 if not DEBUG:
