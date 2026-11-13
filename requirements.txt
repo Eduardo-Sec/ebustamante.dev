@@ -1,4 +1,4 @@
 django==6.0.*
 mistune==3.*
 python-slugify==9.*
-gunicorn==26.*
+gunicorn==27.*
